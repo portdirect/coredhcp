@@ -8,6 +8,7 @@ import (
 	"github.com/coredhcp/coredhcp/logger"
 	_ "github.com/coredhcp/coredhcp/plugins/file"
 	_ "github.com/coredhcp/coredhcp/plugins/server_id"
+	_ "github.com/coredhcp/coredhcp/plugins/example"
 )
 
 // Application variables

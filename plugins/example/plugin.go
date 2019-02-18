@@ -40,7 +40,7 @@ var log = logger.GetLogger()
 //
 // server6:
 //   listen: '[::]547'
-//   - example:
+		//   - example:
 //   - server_id: LL aa:bb:cc:dd:ee:ff
 //   - file: "leases.txt"
 //
@@ -91,8 +91,10 @@ func exampleHandler6(req, resp dhcpv6.DHCPv6) (dhcpv6.DHCPv6, bool) {
 // exampleHandler4 behaves like exampleHandler6, but for DHCPv4 packets. It
 // implements the `handler.Handler4` interface.
 func exampleHandler4(req, resp *dhcpv4.DHCPv4) (*dhcpv4.DHCPv4, bool) {
-	// TODO check the MAC address in the request
-	//      if it is present in StaticRecords, forge a response
-	//      and stop processing.
-	return resp, true
+	log.Printf("plugins/example: Client %s", req.ClientHWAddr)
+	log.Printf("plugins/example: received DHCPv4 packet: %s", req.Summary())
+	// return the unmodified response, and false. This means that the next
+	// plugin in the chain will be called, and the unmodified response packet
+	// will be used as its input.
+	return resp, false
 }
